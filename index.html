@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إلى أميرة قلبي شيماء ❤️</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;900&family=Reem+Kufi:wght@500;700;900&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        romantic: {
+                            50: '#fff0f3',
+                            100: '#ffccd5',
+                            200: '#ffb3c1',
+                            300: '#ff8fa3',
+                            400: '#ff758f',
+                            500: '#ff4d6d',
+                            600: '#c9184a',
+                            700: '#a4133c',
+                            800: '#800f2f',
+                            900: '#4a0519',
+                        },
+                        gold: {
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        amiri: ['Amiri', 'serif'],
+                        kufi: ['Reem Kufi', 'sans-serif'],
+                        ruqaa: ['Aref Ruqaa', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #1f030d 0%, #3b071e 40%, #17020a 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 182, 193, 0.25);
+            box-shadow: 0 12px 40px 0 rgba(201, 24, 74, 0.25);
+        }
+
+        .glass-card-gold {
+            background: rgba(255, 215, 0, 0.04);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            box-shadow: 0 10px 30px 0 rgba(234, 179, 8, 0.15);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        /* Canvas bg */
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Glow Animations */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 77, 109, 0.4), 0 0 40px rgba(255, 77, 109, 0.2); }
+            50% { box-shadow: 0 0 35px rgba(255, 77, 109, 0.8), 0 0 60px rgba(255, 77, 109, 0.5); }
+        }
+
+        .pulse-glow {
+            animation: pulseGlow 3.5s infinite ease-in-out;
+        }
+
+        /* Heart & Shaimaa Click Effect */
+        .click-pop {
+            position: absolute;
+            pointer-events: none;
+            animation: floatUpFade 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            z-index: 9999;
+            white-space: nowrap;
+        }
+
+        @keyframes floatUpFade {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
+            }
+            50% {
+                opacity: 0.9;
+                transform: translate(-50%, -90px) scale(1.2) rotate(8deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -170px) scale(0.8) rotate(-8deg);
+            }
+        }
+
+        /* Shimmer text effect */
+        .shimmer-gold {
+            background: linear-gradient(90deg, #ffe4e6 0%, #facc15 50%, #ffe4e6 100%);
+            background-size: 200% auto;
+            color: #000;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3.5s linear infinite;
+        }
+
+        .shimmer-pink {
+            background: linear-gradient(90deg, #ff8fa3 0%, #ffffff 50%, #ff8fa3 100%);
+            background-size: 200% auto;
+            color: #000;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* Flip card */
+        .flip-card { perspective: 1000px; }
+        .flip-card-inner {
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { backface-visibility: hidden; }
+        .flip-card-back { transform: rotateY(180deg); }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col justify-between overflow-x-hidden selection:bg-romantic-500 selection:text-white">
+
+    <!-- Floating Background Canvas -->
+    <canvas id="canvas-bg"></canvas>
+
+    <!-- Content Container -->
+    <div class="relative z-10 w-full min-h-screen flex flex-col justify-center items-center p-4 md:p-8">
+
+        <!-- ========================================== -->
+        <!-- 1. LOCK SCREEN CONTAINER                   -->
+        <!-- ========================================== -->
+        <div id="lock-screen" class="w-full max-w-md transition-all duration-700 transform scale-100 opacity-100">
+            <div class="glass-card rounded-3xl p-8 text-center relative overflow-hidden pulse-glow">
+                
+                <!-- Glowing Pulsing Heart Header -->
+                <div class="relative w-24 h-24 mx-auto mb-6">
+                    <div class="absolute inset-0 rounded-full bg-romantic-500/30 animate-ping"></div>
+                    <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-romantic-600 via-romantic-500 to-rose-400 flex items-center justify-center shadow-xl shadow-romantic-600/50 relative z-10">
+                        <i class="fa-solid fa-heart text-4xl text-white animate-pulse"></i>
+                    </div>
+                </div>
+
+                <h1 class="font-ruqaa text-3xl md:text-4xl font-bold mb-2 text-pink-100">عالم شيماء الخاص ✨</h1>
+                <p class="text-pink-200/80 text-sm mb-6 font-cairo">أدخلي السر الخفي لتفتحي قلبي يا شيماء ❤️</p>
+
+                <!-- Form -->
+                <form id="login-form" onsubmit="handleLogin(event)" class="space-y-5">
+                    <div class="relative">
+                        <input 
+                            type="password" 
+                            id="password-input"
+                            placeholder="أدخلي كلمة السر السرية..." 
+                            class="w-full px-5 py-4 text-center text-xl rounded-2xl glass-input text-white placeholder-pink-200/40 focus:outline-none focus:ring-2 focus:ring-romantic-400 transition-all font-cairo tracking-widest"
+                            required
+                        />
+                        <button type="button" onclick="togglePasswordVisibility()" class="absolute left-4 top-1/2 -translate-y-1/2 text-pink-200/60 hover:text-white transition">
+                            <i id="eye-icon" class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        class="w-full py-4 rounded-2xl bg-gradient-to-r from-romantic-600 via-romantic-500 to-romantic-700 hover:from-romantic-500 hover:to-romantic-800 text-white font-bold text-lg shadow-lg shadow-romantic-600/50 hover:shadow-romantic-600/70 transition-all duration-300 transform active:scale-95 flex items-center justify-center gap-3"
+                    >
+                        <span class="font-kufi">افتحي قلبي يا شيماء</span>
+                        <i class="fa-solid fa-key text-gold-300"></i>
+                    </button>
+                </form>
+
+                <!-- Error Box -->
+                <div id="error-msg" class="hidden mt-4 text-sm text-red-200 bg-red-900/50 py-3 px-4 rounded-xl border border-red-500/40 animate-bounce">
+                    <i class="fa-solid fa-heart-crack ml-1 text-romantic-400"></i>
+                    <span>كلمة السر غير صحيحة! حاولي مرة ثانية يا أميرتي ❤️</span>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-pink-500/10 flex items-center justify-center gap-2 text-xs text-pink-300/60 font-amiri italic">
+                    <i class="fa-solid fa-sparkles text-gold-400"></i>
+                    <span>تاريخ حُفر في وجداني للأبد</span>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- 2. MAIN CONTENT SCREEN                     -->
+        <!-- ========================================== -->
+        <div id="main-content" class="hidden w-full max-w-4xl space-y-8 my-4 transition-all duration-1000 transform translate-y-10 opacity-0">
+
+            <!-- Top Header & Song Controller -->
+            <div class="glass-card rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 border-romantic-400/30">
+                <div class="text-center md:text-right space-y-2">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-romantic-500/20 text-pink-200 rounded-full text-xs font-semibold border border-romantic-500/30">
+                        <i class="fa-solid fa-crown text-gold-400"></i>
+                        <span>ملكة قلبي: شيماء ❤️</span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold font-ruqaa shimmer-gold">إلى أغلَى ما في العُمر.. شيماء ✨</h2>
+                    <p class="text-pink-200/80 text-sm font-cairo">والعُمر إيه؟ ما العُمر ليلة.. لو مش معاكي يا شيماء بلا خيبة!</p>
+                </div>
+
+                <!-- Custom Player for Tul8te Track -->
+                <div class="w-full md:w-auto bg-black/50 backdrop-blur-md p-4 rounded-2xl border border-romantic-500/40 flex items-center gap-4">
+                    <button id="play-btn" onclick="toggleAudio()" class="w-14 h-14 rounded-full bg-gradient-to-tr from-romantic-600 to-romantic-400 hover:from-romantic-500 hover:to-romantic-300 text-white flex items-center justify-center text-2xl shadow-xl shadow-romantic-600/50 transition duration-300 transform active:scale-90 flex-shrink-0">
+                        <i id="play-icon" class="fa-solid fa-pause ml-1"></i>
+                    </button>
+
+                    <div class="flex-grow min-w-[160px]">
+                        <div class="flex items-center justify-between text-xs text-pink-100 mb-1">
+                            <span class="font-bold text-sm truncate max-w-[150px] font-kufi">تووليت - الحب جاني</span>
+                            <span id="audio-time" class="font-mono text-pink-300">0:00</span>
+                        </div>
+                        <p class="text-[11px] text-pink-300/80 mb-2 truncate">والعمر ليلة لو مش معاك يا حبيبي 💕</p>
+
+                        <!-- Equalizer Animation -->
+                        <div id="equalizer" class="flex items-end gap-1 h-4">
+                            <span class="w-1 bg-romantic-400 h-2 animate-pulse"></span>
+                            <span class="w-1 bg-gold-400 h-4 animate-pulse delay-75"></span>
+                            <span class="w-1 bg-romantic-400 h-3 animate-pulse delay-150"></span>
+                            <span class="w-1 bg-pink-300 h-4 animate-pulse delay-100"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio Tag with Tul8te Track -->
+            <audio id="bg-audio" loop preload="auto">
+                <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-112877.mp3" type="audio/mpeg">
+            </audio>
+
+            <!-- Song Lyric Display Banner -->
+            <div class="glass-card-gold rounded-2xl p-4 text-center border-gold-400/30">
+                <p class="font-amiri text-lg md:text-xl text-gold-300 font-bold">
+                    🎵 "والعمر إيه؟ ما العمر ليلة.. لو مش معاكي يا شيماء بلا خيبة" 🎵
+                </p>
+            </div>
+
+            <!-- 3. MAIN ROMANTIC MESSAGE FOR SHAIMAA -->
+            <div class="glass-card rounded-3xl p-6 md:p-10 relative overflow-hidden text-right space-y-6 pulse-glow border-romantic-400/40">
+                
+                <div class="absolute -top-20 -left-20 w-64 h-64 bg-romantic-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="flex items-center justify-between border-b border-pink-500/20 pb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-romantic-500/20 flex items-center justify-center text-romantic-300">
+                            <i class="fa-solid fa-paper-plane text-lg"></i>
+                        </div>
+                        <h3 class="font-ruqaa text-2xl md:text-3xl font-bold text-pink-100">رسالتي لشيماء ❤️</h3>
+                    </div>
+                    <span class="text-xs text-gold-400 font-mono font-bold bg-gold-400/10 px-3 py-1 rounded-full border border-gold-400/20">Shaimaa My Life</span>
+                </div>
+
+                <!-- User exact love message -->
+                <div class="py-2">
+                    <p class="font-amiri text-2xl md:text-3xl leading-relaxed md:leading-loose text-pink-50 font-medium tracking-wide">
+                        "يا شيماء.. عايز اقولك اني بحبك انا بحب كلامنا سوا هزرنا وكل حاجه بينا بحب كلامك ليا بحب كل حاجه فيكي مهما ما اوصفلك انا بحبك قد ايه مش هخلص بس الي اعرفه انك غاليه عندي واني بحبك وربنا يخليكي ليا ❤️❤️"
+                    </p>
+                </div>
+
+                <div class="pt-4 border-t border-pink-500/20 flex flex-col sm:flex-row items-center justify-between text-sm text-pink-200/80 gap-4">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-romantic-400 animate-ping"></span>
+                        <span class="font-cairo text-xs md:text-sm">اضغطي في أي مكان بالصفحة لتطير القلوب باسمك ✨</span>
+                    </div>
+                    <div class="font-ruqaa text-2xl text-gold-300 font-bold">
+                        بحبك يا شيماء 💖
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. CARDS GRID FOR SHAIMAA -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Flip Card for Shaimaa -->
+                <div class="flip-card h-64 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner relative w-full h-full text-center rounded-3xl shadow-xl">
+                        
+                        <!-- Front -->
+                        <div class="flip-card-front absolute inset-0 glass-card rounded-3xl p-6 flex flex-col items-center justify-center space-y-3 border-pink-400/40">
+                            <div class="w-16 h-16 rounded-full bg-romantic-500/20 flex items-center justify-center text-romantic-300 text-3xl">
+                                <i class="fa-solid fa-heart-circle-plus"></i>
+                            </div>
+                            <h4 class="font-ruqaa text-2xl font-bold text-pink-100">سر صغير لشيماء 💌</h4>
+                            <p class="text-xs text-pink-300/70">اضغطي هنا لتقبلي البطاقة وتكتشفي المفاجأة</p>
+                        </div>
+
+                        <!-- Back -->
+                        <div class="flip-card-back absolute inset-0 glass-card rounded-3xl p-6 flex flex-col items-center justify-center space-y-3 border-gold-400/50 bg-romantic-900/60">
+                            <i class="fa-solid fa-gem text-gold-400 text-3xl animate-bounce"></i>
+                            <h4 class="font-kufi text-xl font-bold text-white">أغلى من العيون يا شيماء</h4>
+                            <p class="text-base font-amiri text-pink-100 leading-relaxed">
+                                "أنتِ لستِ فقط حبيبتي، أنتِ نعمَة ربي وجنته في أرضه، ربنا يديمك في حياتي يا كل دنيتي."
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Quotes & Poetry Carousel for Shaimaa -->
+                <div class="glass-card rounded-3xl p-6 flex flex-col justify-between border-pink-500/30">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-kufi text-lg font-bold text-gold-300">كلمات في حب شيماء 💕</h4>
+                            <i class="fa-solid fa-quote-left text-romantic-400 opacity-50 text-xl"></i>
+                        </div>
+                        <p id="quote-display" class="font-amiri text-xl text-pink-100 min-h-[75px] transition-opacity duration-500 flex items-center">
+                            "شيماء.. اسمكِ وحده حين يمر على قلبي يملؤه بالدفء والحب."
+                        </p>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <button onclick="prevQuote()" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition active:scale-90">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </button>
+                        <span id="quote-index" class="text-xs text-pink-300 font-mono">1 / 5</span>
+                        <button onclick="nextQuote()" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition active:scale-90">
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Surprises & Interactive Button -->
+            <div class="text-center pt-4">
+                <button onclick="triggerLoveSurprise()" class="px-8 py-4 rounded-full bg-gradient-to-r from-gold-500 via-romantic-500 to-rose-600 text-white font-kufi font-bold text-lg shadow-xl shadow-romantic-500/40 hover:scale-105 transition duration-300 active:scale-95 flex items-center justify-center gap-3 mx-auto">
+                    <i class="fa-solid fa-sparkles text-gold-300"></i>
+                    <span>اضغطي هنا لمفاجأة سريعة يا شيماء!</span>
+                    <i class="fa-solid fa-heart text-pink-200"></i>
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-center py-6 text-xs text-pink-300/50 space-y-2">
+                <p class="font-cairo">صُنعت بكل حب وشغف لـ **شيماء** ❤️</p>
+                <p class="font-mono text-[10px] tracking-widest opacity-60">FOREVER & ALWAYS SHAIMAA</p>
+            </footer>
+
+        </div>
+
+    </div>
+
+
+    <!-- JS LOGIC -->
+    <script>
+        /* -------------------------------------------------------------
+           1. CANVAS PARTICLES (Hearts & Gold Dust)
+        ------------------------------------------------------------- */
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const heartSvgPath = "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
+
+        class Particle {
+            constructor() { this.reset(); }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = height + Math.random() * 80;
+                this.size = Math.random() * 14 + 6;
+                this.speedY = Math.random() * 1.2 + 0.4;
+                this.speedX = Math.sin(Math.random() * Math.PI * 2) * 0.6;
+                this.opacity = Math.random() * 0.6 + 0.2;
+                this.color = Math.random() > 0.3 
+                    ? `hsla(${Math.random() * 30 + 330}, 100%, 75%, ${this.opacity})` 
+                    : `hsla(45, 100%, 70%, ${this.opacity})`;
+                this.rotation = Math.random() * 360;
+                this.rotSpeed = (Math.random() - 0.5) * 1;
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                this.rotation += this.rotSpeed;
+                if (this.y < -30) this.reset();
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                const scale = this.size / 24;
+                ctx.scale(scale, scale);
+                ctx.translate(-12, -12);
+                const p = new Path2D(heartSvgPath);
+                ctx.fill(p);
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 50; i++) particles.push(new Particle());
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+
+        /* -------------------------------------------------------------
+           2. PASSWORD LOGIC (291198)
+        ------------------------------------------------------------- */
+        const CORRECT_PASS = "291198";
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const input = document.getElementById('password-input').value.trim();
+            const errorMsg = document.getElementById('error-msg');
+            const lockScreen = document.getElementById('lock-screen');
+            const mainContent = document.getElementById('main-content');
+
+            if (input === CORRECT_PASS) {
+                errorMsg.classList.add('hidden');
+                lockScreen.classList.add('scale-90', 'opacity-0');
+                
+                setTimeout(() => {
+                    lockScreen.classList.add('hidden');
+                    mainContent.classList.remove('hidden');
+                    
+                    setTimeout(() => {
+                        mainContent.classList.remove('translate-y-10', 'opacity-0');
+                        mainContent.classList.add('translate-y-0', 'opacity-100');
+                        startAudio();
+                    }, 50);
+
+                }, 600);
+            } else {
+                errorMsg.classList.remove('hidden');
+                lockScreen.classList.add('animate-bounce');
+                setTimeout(() => lockScreen.classList.remove('animate-bounce'), 600);
+            }
+        }
+
+        function togglePasswordVisibility() {
+            const input = document.getElementById('password-input');
+            const icon = document.getElementById('eye-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+
+        /* -------------------------------------------------------------
+           3. AUDIO PLAYER (Tul8te - الحب جاني ONLY)
+        ------------------------------------------------------------- */
+        const audio = document.getElementById('bg-audio');
+        const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const equalizer = document.getElementById('equalizer');
+        const audioTime = document.getElementById('audio-time');
+
+        function startAudio() {
+            audio.play().then(() => {
+                updatePlayerUI(true);
+            }).catch((err) => {
+                console.log("Autoplay context:", err);
+                updatePlayerUI(false);
+            });
+        }
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                updatePlayerUI(true);
+            } else {
+                audio.pause();
+                updatePlayerUI(false);
+            }
+        }
+
+        function updatePlayerUI(isPlaying) {
+            if (isPlaying) {
+                playIcon.className = 'fa-solid fa-pause';
+                equalizer.classList.remove('hidden');
+            } else {
+                playIcon.className = 'fa-solid fa-play ml-1';
+                equalizer.classList.add('hidden');
+            }
+        }
+
+        audio.addEventListener('timeupdate', () => {
+            if (!isNaN(audio.currentTime)) {
+                const mins = Math.floor(audio.currentTime / 60);
+                const secs = Math.floor(audio.currentTime % 60);
+                audioTime.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+        });
+
+
+        /* -------------------------------------------------------------
+           4. CLICK/TAP EFFECT WITH SHAIMAA & HEARTS
+        ------------------------------------------------------------- */
+        const clickMessages = [
+            '❤️ شيماء', 
+            'بحبك يا شيماء 💖', 
+            'أميرة قلبي ✨', 
+            'روحي شيماء 💕', 
+            'غالية عندي 🌸', 
+            'ربنا يخليكي ليا 🌹'
+        ];
+
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('input') || e.target.closest('button') || e.target.closest('.flip-card')) return;
+
+            const pop = document.createElement('div');
+            pop.className = 'click-pop font-ruqaa text-xl font-bold text-gold-300 drop-shadow-[0_2px_8px_rgba(255,77,109,0.8)]';
+            pop.innerHTML = clickMessages[Math.floor(Math.random() * clickMessages.length)];
+            pop.style.left = `${e.clientX}px`;
+            pop.style.top = `${e.clientY}px`;
+            
+            document.body.appendChild(pop);
+
+            setTimeout(() => pop.remove(), 2000);
+        });
+
+
+        /* -------------------------------------------------------------
+           5. SHAIMAA QUOTES SLIDER
+        ------------------------------------------------------------- */
+        const quotes = [
+            "شيماء.. اسمكِ وحده حين يمر على قلبي يملؤه بالدفء والحب.",
+            "كل ثانية معاكي يا شيماء بتسوى عندي الدنيا كلها بما فيها ❤️",
+            "أنتِ النعمة الجميلة التي أكرمني الله بها يا أحلى شيماء.",
+            "لو جمعت كل كلام الحب في العالم، مش هيكفي يوصف حبك في قلبي.",
+            "شيماء.. أدامكِ الله لي حبيبتي وأميرتي وسعادتي الدائمة."
+        ];
+
+        let currentQuoteIndex = 0;
+        const quoteDisplay = document.getElementById('quote-display');
+        const quoteIndexDisplay = document.getElementById('quote-index');
+
+        function updateQuote() {
+            quoteDisplay.style.opacity = '0';
+            setTimeout(() => {
+                quoteDisplay.textContent = `"${quotes[currentQuoteIndex]}"`;
+                quoteIndexDisplay.textContent = `${currentQuoteIndex + 1} / ${quotes.length}`;
+                quoteDisplay.style.opacity = '1';
+            }, 300);
+        }
+
+        function nextQuote() {
+            currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+            updateQuote();
+        }
+
+        function prevQuote() {
+            currentQuoteIndex = (currentQuoteIndex - 1 + quotes.length) % quotes.length;
+            updateQuote();
+        }
+
+        setInterval(nextQuote, 6500);
+
+
+        /* -------------------------------------------------------------
+           6. SURPRISE BUTTON ACTION
+        ------------------------------------------------------------- */
+        function triggerLoveSurprise() {
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const pop = document.createElement('div');
+                    pop.className = 'click-pop font-ruqaa text-2xl font-bold text-pink-200';
+                    pop.innerHTML = Math.random() > 0.5 ? '❤️ بحبك يا شيماء ❤️' : '✨ شيماء حياتي ✨';
+                    pop.style.left = `${Math.random() * (window.innerWidth - 100) + 50}px`;
+                    pop.style.top = `${Math.random() * (window.innerHeight - 100) + 50}px`;
+                    document.body.appendChild(pop);
+                    setTimeout(() => pop.remove(), 2200);
+                }, i * 120);
+            }
+        }
+    </script>
+</body>
+</html>
